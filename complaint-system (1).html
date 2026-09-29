@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smart College Complaint System</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--tx:#0f1e3a;--mu:#64748b;--bd:#e2e8f0;--pri:#0f2a5c;--ac:#0d9488;--ok:#16a34a;--wa:#f59e0b;--er:#dc2626;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--card:#131c2e;--tx:#e6ecf7;--mu:#94a3b8;--bd:#25314a;--pri:#4f7cff}}
+:root[data-theme="dark"]{--bg:#0b1220;--card:#131c2e;--tx:#e6ecf7;--mu:#94a3b8;--bd:#25314a;--pri:#4f7cff}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{margin:0 0 .5rem;line-height:1.2}a{color:var(--ac)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--card);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:1rem;padding:.7rem 1.2rem;flex-wrap:wrap}
+.logo{font-weight:800;color:var(--pri);cursor:pointer;display:flex;gap:.5rem;align-items:center}
+.logo i{background:linear-gradient(135deg,var(--pri),var(--ac));color:#fff;border-radius:9px;width:30px;height:30px;display:grid;place-items:center;font-style:normal}
+nav{display:flex;gap:.3rem;flex:1;flex-wrap:wrap}nav a{padding:.4rem .8rem;border-radius:8px;color:var(--mu);text-decoration:none;cursor:pointer;font-weight:500;transition:.2s}
+nav a:hover,nav a.on{background:var(--bg);color:var(--pri)}
+#burger{display:none}
+.btn{border:0;border-radius:10px;padding:.55rem 1.1rem;font-weight:600;cursor:pointer;background:var(--pri);color:#fff;transition:.2s;font-size:.95rem}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px #0f2a5c33}.btn.sec{background:transparent;color:var(--pri);border:1.5px solid var(--pri)}
+.btn.ac{background:var(--ac)}.btn.sm{padding:.3rem .7rem;font-size:.85rem}.btn.er{background:var(--er)}
+main{max-width:1150px;margin:0 auto;padding:1.4rem 1.2rem 3rem}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:1.2rem;box-shadow:0 2px 10px #0f1e3a0a;transition:.2s}
+.grid{display:grid;gap:1rem}.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.stat b{display:block;font-size:2rem;color:var(--pri)}.stat span{color:var(--mu);font-size:.8rem;letter-spacing:.06em;font-weight:600}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:center;padding:2rem 0}
+.hero h1{font-size:2.8rem;color:var(--pri)}.hero p{color:var(--mu);font-size:1.1rem}
+.feat:hover{transform:translateY(-4px)}.feat .ic{font-size:1.8rem}
+.badge{display:inline-block;padding:.15rem .6rem;border-radius:99px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.s-Submitted{background:#e0e7ff;color:#3730a3}.s-Assigned{background:#cffafe;color:#155e75}.s-Under-Review{background:#fef3c7;color:#92400e}
+.s-In-Progress{background:#dbeafe;color:#1e40af}.s-Resolved{background:#dcfce7;color:#166534}.s-Closed{background:#e2e8f0;color:#334155}.s-Escalated{background:#fee2e2;color:#991b1b}
+.p-Low{color:var(--mu)}.p-Medium{color:#2563eb}.p-High{color:var(--wa)}.p-Urgent{color:var(--er);font-weight:700}
+table{width:100%;border-collapse:collapse}th{text-align:left;font-size:.75rem;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;padding:.5rem}
+td{padding:.65rem .5rem;border-top:1px solid var(--bd)}tr.row:hover{background:var(--bg)}
+input,select,textarea{width:100%;padding:.6rem .8rem;border:1.5px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--ac);border-color:transparent}
+label{display:block;font-weight:600;font-size:.85rem;margin:.8rem 0 .25rem}.err{color:var(--er);font-size:.82rem}
+.bar{display:flex;align-items:center;gap:.5rem;margin:.35rem 0;font-size:.85rem}.bar div{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--pri),var(--ac));transition:width .6s}.bar span:first-child{width:130px;flex:none;color:var(--mu)}
+.steps{display:flex;gap:.4rem;margin-bottom:1rem}.steps div{flex:1;height:6px;border-radius:4px;background:var(--bd)}.steps .on{background:var(--ac)}
+.tl{list-style:none;padding:0;margin:0}.tl li{position:relative;padding:0 0 1.2rem 2rem;color:var(--mu)}
+.tl li:before{content:"";position:absolute;left:8px;top:18px;bottom:0;width:2px;background:var(--bd)}.tl li:last-child:before{display:none}
+.tl li i{position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;border:2px solid var(--bd);background:var(--card);font-size:.6rem;display:grid;place-items:center;font-style:normal}
+.tl li.done{color:var(--tx)}.tl li.done i{background:var(--ok);border-color:var(--ok);color:#fff}.tl li.now i{border-color:var(--ac);background:var(--ac);color:#fff;box-shadow:0 0 0 4px #0d948833}
+.tl li.esc i{background:var(--er);border-color:var(--er);color:#fff}
+.warn{background:#fff7ed;border:1px solid #fdba74;color:#9a3412;border-radius:12px;padding:.8rem 1rem;margin-bottom:.8rem}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:20px;background:var(--pri);color:#fff;padding:.8rem 1.2rem;border-radius:12px;z-index:50;animation:in .3s}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.stars span{font-size:1.8rem;cursor:pointer;color:var(--bd)}.stars .f{color:var(--wa)}
+.empty{text-align:center;color:var(--mu);padding:2rem}.tools{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}.tools>*{flex:1;min-width:130px}
+.tw{overflow-x:auto}.dot{width:8px;height:8px;background:var(--er);border-radius:50%;display:inline-block}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.hero h1{font-size:2rem}#burger{display:block;margin-left:auto}
+nav{display:none;width:100%;flex-direction:column}nav.open{display:flex}
+table,tbody,tr,td{display:block;width:100%}thead{display:none}tr.row{border:1px solid var(--bd);border-radius:12px;margin-bottom:.6rem;padding:.4rem}
+td{border:0;padding:.2rem .5rem;display:flex;justify-content:space-between;gap:1rem}td:before{content:attr(data-l);color:var(--mu);font-size:.78rem}.bar span:first-child{width:90px}}
+</style></head><body>
+<div id="app"></div><div id="toast"></div>
+<script>
+const DEPT={Hostel:"Hostel Administration","Mess/Food":"Mess Committee",Academic:"Academic Department",Infrastructure:"Maintenance Department",Electrical:"Electrical Maintenance",Sanitation:"Housekeeping",Transport:"Transport Department",Security:"Security Office",Other:"Administration Office"};
+const CATS=Object.keys(DEPT),PRI=["Low","Medium","High","Urgent"],SLA={Low:168,Medium:72,High:24,Urgent:4};
+const FLOW=["Submitted","Assigned","Under Review","In Progress","Resolved","Closed"],ALLS=[...FLOW,"Escalated"];
+const H=36e5,sc=s=>"s-"+s.replace(" ","-"),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fd=t=>new Date(t).toLocaleString("en-IN",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"});
+let S,U=null,R={v:"landing"},F={step:1,d:{}},flt={},tmpFiles=[];
+function seed(){const n=Date.now();const C=[];
+const mk=(k,t,cat,p,st,age,anon,sid,nm,desc,loc,fb)=>{const cr=n-age*H,d=DEPT[cat];
+const u=[{t:cr,m:"Complaint submitted",s:"Submitted",pub:1},{t:cr+.25*H,m:"Assigned to "+d,s:"Assigned",pub:1}];
+const i=FLOW.indexOf(st);if(i>=2)u.push({t:cr+2*H,m:"Complaint is under review",s:"Under Review",pub:1});
+if(i>=3)u.push({t:cr+5*H,m:"Maintenance team inspected the location",s:"In Progress",pub:1});
+if(i>=4)u.push({t:cr+age*H*.6,m:"Issue fixed and verified",s:"Resolved",pub:1});
+const c={id:"CMP-2026-00"+k,title:t,desc,cat,loc,pri:p,anon,sid,student:nm,status:st,dept:d,officer:"Officer "+d.split(" ")[0],created:cr,deadline:cr+SLA[p]*H,upd:u,notes:[],fb:fb||null,prev:null,att:[]};
+if(st=="Escalated"){c.prev="In Progress";u.push({t:cr+SLA[p]*H,m:"Deadline exceeded – auto-escalated",s:"Escalated",pub:1});S_esc.push({cid:c.id,reason:"Deadline exceeded",to:"College Administration",t:cr+SLA[p]*H,res:null})}
+C.push(c)};
+S_esc=[];
+mk(118,"Overflowing dustbins near canteen","Sanitation","Low","Closed",300,0,"u9","Riya Shah","Bins are not cleared for days.","Canteen Area",{r:4,c:"Cleaned quickly"});
+mk(119,"Bus route 4 running late daily","Transport","Medium","Resolved",120,0,"u8","Kabir Rao","Bus arrives 30 min late.","Gate 2",{r:3,c:"Better now"});
+mk(120,"Suspicious person near girls hostel","Security","Urgent","Assigned",1,1,"u7","Anonymous","Unknown man loitering at night.","Hostel Gate");
+mk(121,"Broken lights in Block A","Electrical","Medium","In Progress",20,0,"s1","Shreyas Verma","Corridor lights on floor 2 are broken.","Block A, Floor 2");
+mk(122,"Water leakage in Hostel B","Hostel","High","Under Review",5,0,"s1","Shreyas Verma","Water leaks from ceiling of room 204.","Hostel Block B, Room 204");
+mk(123,"Poor food quality","Mess/Food","Medium","Resolved",96,0,"s1","Shreyas Verma","Food served cold and stale.","Main Mess",{r:5,c:"Menu improved, thanks!"});
+mk(124,"Classroom projector not working","Infrastructure","High","Escalated",72,0,"s1","Shreyas Verma","Projector in Room 305 shows no display.","Room 305");
+mk(125,"Syllabus not shared for elective","Academic","Low","Submitted",2,1,"s1","Anonymous","No syllabus provided by department.","CS Department");
+mk(126,"Wi-Fi dead zone in library","Infrastructure","Medium","Closed",240,0,"u8","Kabir Rao","No signal on 2nd floor.","Library",{r:4,c:"OK"});
+mk(127,"Fan sparking in Room 112","Electrical","Urgent","Resolved",30,0,"u9","Riya Shah","Fan sparks when turned on.","Hostel A, 112",{r:5,c:"Fast response"});
+const nt=[{u:"s1",cid:"CMP-2026-00124",m:"Your complaint CMP-2026-00124 has been escalated to College Administration.",t:n-24*H,r:0},{u:"s1",cid:"CMP-2026-00123",m:"Your complaint CMP-2026-00123 was resolved. Please rate your experience.",t:n-40*H,r:1},{u:"s1",cid:"CMP-2026-00122",m:"Your complaint CMP-2026-00122 has been assigned to Hostel Administration.",t:n-4*H,r:0}];
+return{C,esc:S_esc,N:nt,seq:128}}
+let S_esc;
+function load(){try{S=JSON.parse(localStorage.getItem("scs2"))}catch(e){}if(!S){S=seed();save()}}
+function save(){try{localStorage.setItem("scs2",JSON.stringify(S))}catch(e){}}
+function toast(m){const t=document.getElementById("toast");t.innerHTML=`<div class="toast">${esc(m)}</div>`;setTimeout(()=>t.innerHTML="",2800)}
+function notify(c,m){S.N.unshift({u:c.sid,cid:c.id,m,t:Date.now(),r:0})}
+function setStatus(c,s,m,pub=1){if(s=="Escalated"){c.prev=c.status}c.status=s;c.upd.push({t:Date.now(),m,s,pub});notify(c,`Your complaint ${c.id}: ${m}`);save()}
+function checkEsc(){let ch=0;S.C.forEach(c=>{if(!["Resolved","Closed","Escalated"].includes(c.status)&&Date.now()>c.deadline){setStatus(c,"Escalated","Deadline exceeded – auto-escalated");S.esc.push({cid:c.id,reason:"Deadline exceeded",to:"College Administration",t:Date.now(),res:null});ch=1}});return ch}
+setInterval(()=>{if(checkEsc()&&U)render()},15000);
+const st=c=>`<span class="badge ${sc(c)}">${c}</span>`;
+const who=c=>c.anon?"Anonymous Complaint":c.student;
+const mine=()=>S.C.filter(c=>c.sid==U.id);
+const scope=()=>U.role=="student"?mine():U.role=="staff"?S.C.filter(c=>c.dept==U.dept):S.C;
+// ---------- routing
+function go(v,id){R={v,id};document.querySelector("nav")?.classList.remove("open");render();scrollTo(0,0)}
+function render(){checkEsc();const V={landing,how,track,login,dash,submit,mine_:myc,notifs,profile,detail,adminc:admC,escal,analytics}[R.v]||landing;
+document.getElementById("app").innerHTML=header()+`<main>${V()}</main>`;if(R.v=="submit")bindSub()}
+function header(){const nav=!U?[["landing","Home"],["how","How It Works"],["track","Track Complaint"],["login","Login"]]:U.role=="student"?[["dash","Dashboard"],["submit","Submit Complaint"],["mine_","My Complaints"],["notifs","Notifications"+(S.N.some(n=>n.u==U.id&&!n.r)?' <span class=dot></span>':"")],["profile","Profile"],["track","Track"]]:[["dash","Dashboard"],["adminc","Complaints"],["escal","Escalations"],["analytics","Analytics"],["track","Track"]];
+return`<div class="top"><div class="logo" onclick="go(U?'dash':'landing')"><i>✦</i>Smart College Complaints</div><button class="btn sec sm" id="burger" onclick="document.querySelector('nav').classList.toggle('open')">☰ Menu</button>
+<nav>${nav.map(([v,l])=>`<a class="${R.v==v?"on":""}" onclick="go('${v}')">${l}</a>`).join("")}</nav>
+${U?`<span style="color:var(--mu);font-size:.85rem">${esc(U.name)} · ${U.role}</span><button class="btn sec sm" onclick="U=null;go('landing')">Logout</button>`:`<button class="btn ac" onclick="U?go('submit'):go('login')">Report an Issue</button>`}</div>`}
+// ---------- public pages
+function landing(){const f=[["📝","Easy Reporting","Submit a complaint in a few simple steps."],["📍","Real-Time Tracking","Know exactly what is happening with your complaint."],["🔀","Automatic Routing","Your complaint reaches the appropriate department automatically."],["🕶️","Anonymous Reporting","Report sensitive issues without revealing your identity."]];
+return`<section class="hero"><div><h1>Your Campus. Your Voice. Your Solution.</h1><p>Report campus issues, track their progress, and help build a better college experience.</p>
+<button class="btn" onclick="go('login')">Report an Issue</button> <button class="btn sec" onclick="go('track')">Track My Complaint</button></div>
+<div class="card"><b>Live campus snapshot</b>${["Submitted","In Progress","Resolved","Escalated"].map(s=>`<div class="bar"><span>${s}</span><div style="width:${S.C.filter(c=>c.status==s).length*18+8}px"></div><span>${S.C.filter(c=>c.status==s).length}</span></div>`).join("")}<p style="color:var(--mu);font-size:.85rem;margin-bottom:0">Every complaint is routed, timed and tracked.</p></div></section>
+<div class="grid g4">${f.map(x=>`<div class="card feat"><div class="ic">${x[0]}</div><h3>${x[1]}</h3><p style="color:var(--mu);margin:0">${x[2]}</p></div>`).join("")}</div>`}
+function how(){const s=["Submit","Select category","Auto department routing","Department review","Status updates","Resolution","Feedback & rating"];
+return`<h2>How It Works</h2><div class="grid g2">${s.map((x,i)=>`<div class="card"><b style="color:var(--ac)">Step ${i+1}</b><h3>${x}</h3></div>`).join("")}</div><p>Complaints not resolved within their deadline (Urgent 4h, High 24h, Medium 72h, Low 7 days) are <b>automatically escalated</b>.</p>`}
+function track(){const q=(R.id||"").trim().toUpperCase(),c=q&&S.C.find(x=>x.id==q);
+return`<h2>Track Complaint</h2><div class="tools"><input id="tq" placeholder="e.g. CMP-2026-00124" value="${esc(q)}" onkeydown="if(event.key=='Enter')go('track',this.value)"><button class="btn" style="flex:0" onclick="go('track',tq.value)">Track</button></div>
+${!q?`<div class="empty">Enter a complaint ID to see its live status.</div>`:!c?`<div class="card err">No complaint found for "${esc(q)}". Check the ID and try again.</div>`:tl(c,true)}`}
+function tl(c,pub){const i=FLOW.indexOf(c.status=="Escalated"?c.prev:c.status),last=c.upd.filter(u=>u.pub).slice(-1)[0];
+const steps=[["Complaint Submitted",0],["Assigned to "+c.dept,1],["Under Review",2],["In Progress",3],["Resolved",4],["Closed",5]];
+return`<div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem"><div><h3>${esc(c.title)}</h3><span style="color:var(--mu)">${c.id} · ${c.cat} · <span class="p-${c.pri}">${c.pri}</span></span></div>${st(c.status)}</div>
+${c.status=="Escalated"?`<div class="warn" style="margin-top:.8rem">⚠ Deadline exceeded – escalated to College Administration.</div>`:""}
+<div class="grid g4" style="margin:1rem 0"><div><small>Department</small><br><b>${c.dept}</b></div><div><small>Submitted</small><br><b>${fd(c.created)}</b></div><div><small>Expected resolution</small><br><b>${fd(c.deadline)}</b></div><div><small>Latest update</small><br><b>${esc(last?.m)}</b></div></div>
+<ul class="tl">${steps.map(([l,k])=>{const d=k<i||(k==i&&k>=4),n=k==i&&!d;const u=c.upd.find(x=>x.s==FLOW[k]);return`<li class="${d?"done":n?"now":""}"><i>${d?"✓":n?"●":""}</i><b>${l}</b>${u?`<br><small>${fd(u.t)}</small>`:""}</li>`}).join("")}
+${c.upd.some(u=>u.s=="Escalated")?`<li class="esc"><i>!</i><b>Escalated</b></li>`:""}</ul></div>`}
+function login(){return`<div class="card" style="max-width:440px;margin:1rem auto"><h2>Sign in</h2><label>Role</label><select id="lr" onchange="lD.style.display=this.value=='staff'?'block':'none'"><option value="student">Student</option><option value="staff">Department Staff</option><option value="admin">Admin</option></select>
+<div id="lD" style="display:none"><label>Department</label><select id="ld">${CATS.map(c=>`<option value="${DEPT[c]}">${DEPT[c]}</option>`).join("")}</select></div>
+<label>Email</label><input id="le" value="demo@college.edu"><label>Password</label><input id="lp" type="password" value="demo1234"><div class="err" id="lerr"></div><br><button class="btn" style="width:100%" onclick="doLogin()">Login</button><p style="color:var(--mu);font-size:.8rem">Demo: any valid email and 4+ char password. Students sign in as Shreyas Verma.</p></div>`}
+function doLogin(){const r=lr.value,e=le.value.trim();if(!/^\S+@\S+\.\S+$/.test(e))return lerr.textContent="Enter a valid email.";if(lp.value.length<4)return lerr.textContent="Password must be at least 4 characters.";
+U=r=="student"?{id:"s1",name:"Shreyas Verma",role:r,email:e}:r=="staff"?{id:"st1",name:"Staff – "+ld.value,role:r,dept:ld.value,email:e}:{id:"a1",name:"Admin",role:r,email:e};toast("Welcome, "+U.name);go("dash")}
+// ---------- tables
+function tbl(list,admin){if(!list.length)return`<div class="empty">📭 No complaints match.</div>`;
+return`<div class="tw"><table><thead><tr><th>ID</th><th>Title</th>${admin?"<th>Student</th>":""}<th>Category</th><th>Department</th><th>Submitted</th><th>Status</th><th>Priority</th><th></th></tr></thead><tbody>${list.map(c=>`<tr class="row"><td data-l="ID">${c.id}</td><td data-l="Title"><b>${esc(c.title)}</b></td>${admin?`<td data-l="Student">${esc(who(c))}</td>`:""}<td data-l="Category">${c.cat}</td><td data-l="Department">${c.dept}</td><td data-l="Submitted">${fd(c.created)}</td><td data-l="Status">${st(c.status)}</td><td data-l="Priority"><span class="p-${c.pri}">${c.pri}</span></td><td><button class="btn sm" onclick="go('detail','${c.id}')">View</button></td></tr>`).join("")}</tbody></table></div>`}
+function cnt(l){return{t:l.length,p:l.filter(c=>["Submitted","Assigned","Under Review"].includes(c.status)).length,ip:l.filter(c=>c.status=="In Progress").length,r:l.filter(c=>["Resolved","Closed"].includes(c.status)).length,e:l.filter(c=>c.status=="Escalated").length}}
+function dash(){const l=scope(),k=cnt(l),s=U.role=="student";
+const cards=s?[["TOTAL COMPLAINTS",k.t],["PENDING",k.p],["IN PROGRESS",k.ip],["RESOLVED",k.r]]:[["TOTAL COMPLAINTS",k.t],["NEW",k.p],["IN PROGRESS",k.ip],["RESOLVED",k.r],["ESCALATED",k.e]];
+const by=(f)=>{const o={};l.forEach(c=>o[f(c)]=(o[f(c)]||0)+1);return o};
+return`<h2>${s?"Dashboard":U.role=="admin"?"Admin Dashboard":U.dept}</h2><div class="grid g4">${cards.map(c=>`<div class="card stat"><b>${c[1]}</b><span>${c[0]}</span></div>`).join("")}</div>
+${!s?`<h3 style="margin-top:1.4rem">Complaint Overview</h3><div class="grid g2"><div class="card"><b>By category</b>${bars(by(c=>c.cat))}</div><div class="card"><b>By department</b>${bars(by(c=>c.dept))}</div><div class="card"><b>Resolved vs pending</b>${bars({Resolved:k.r,Pending:k.p+k.ip,Escalated:k.e})}</div><div class="card"><b>Avg resolution time</b><div class="stat"><b>${avgRes(l)}</b></div></div></div>`:""}
+<h3 style="margin-top:1.4rem">Recent Complaints</h3><div class="card">${tbl([...l].sort((a,b)=>b.created-a.created).slice(0,6),!s)}</div>`}
+function bars(o){const m=Math.max(1,...Object.values(o));return Object.entries(o).map(([k,v])=>`<div class="bar"><span>${esc(k)}</span><div style="width:${v/m*100}%;min-width:4px;max-width:55%"></div><span>${v}</span></div>`).join("")||`<div class="empty">No data</div>`}
+function avgRes(l){const r=l.filter(c=>["Resolved","Closed"].includes(c.status));if(!r.length)return"–";const a=r.reduce((s,c)=>s+(c.upd.filter(u=>u.s=="Resolved")[0]?.t||c.created)-c.created,0)/r.length/H;return a.toFixed(1)+" hrs"}
+function myc(){return`<h2>My Complaints</h2><div class="tools"><input placeholder="Search by ID, title, category, status…" oninput="flt.q=this.value;fl()" value="${esc(flt.q||"")}"></div><div class="card" id="lst">${tbl(fq(mine()))}</div>`}
+function fq(l){const q=(flt.q||"").toLowerCase();return l.filter(c=>(!q||[c.id,c.title,c.cat,c.status,c.dept,c.student].join(" ").toLowerCase().includes(q))&&(!flt.cat||c.cat==flt.cat)&&(!flt.dept||c.dept==flt.dept)&&(!flt.st||c.status==flt.st)&&(!flt.pri||c.pri==flt.pri)&&(!flt.days||Date.now()-c.created<flt.days*24*H)).sort((a,b)=>b.created-a.created)}
+function fl(){lst.innerHTML=tbl(fq(U.role=="student"?mine():scope()),U.role!="student")}
+function admC(){const o=(a,k,l)=>`<select onchange="flt.${k}=this.value;fl()"><option value="">${l}</option>${a.map(x=>`<option ${flt[k]==x?"selected":""}>${x}</option>`).join("")}</select>`;
+return`<h2>Complaints</h2><div class="tools"><input placeholder="Search ID, title, student…" oninput="flt.q=this.value;fl()" value="${esc(flt.q||"")}">${o(CATS,"cat","Category")}${o([...new Set(Object.values(DEPT))],"dept","Department")}${o(ALLS,"st","Status")}${o(PRI,"pri","Priority")}<select onchange="flt.days=+this.value;fl()"><option value="0">Any date</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select></div><div class="card" id="lst">${tbl(fq(scope()),1)}</div>`}
+// ---------- submit
+function submit(){const d=F.d,s=F.step;const bar=`<div class="steps">${[1,2,3,4].map(i=>`<div class="${i<=s&&F.step!=5?"on":""}"></div>`).join("")}</div>`;
+if(s==5){const c=F.done;return`<div class="card" style="text-align:center"><h2>✅ Complaint Submitted Successfully</h2><h1 style="color:var(--ac)">${c.id}</h1><p>Category: <b>${c.cat}</b> · Department: <b>${c.dept}</b><br>Status: ${st(c.status)} · ${fd(c.created)}</p><button class="btn" onclick="go('track','${c.id}')">Track Complaint</button></div>`}
+if(s==1)return`<h2>Submit Complaint</h2><div class="card">${bar}<b>Step 1 — Basic details</b><label>Title</label><input id="f_t" placeholder="Water leakage in Hostel Block B" value="${esc(d.t||"")}"><label>Category</label><select id="f_c"><option value="">Select…</option>${CATS.map(c=>`<option ${d.c==c?"selected":""}>${c}</option>`).join("")}</select>
+<label>Description</label><textarea id="f_d" rows="4">${esc(d.d||"")}</textarea><div class="grid g4"><div><label>Building</label><input id="f_b" value="${esc(d.b||"")}"></div><div><label>Block</label><input id="f_k" value="${esc(d.k||"")}"></div><div><label>Room / Area</label><input id="f_r" value="${esc(d.r||"")}"></div><div><label>Priority</label><select id="f_p">${PRI.map(p=>`<option ${(d.p||"Medium")==p?"selected":""}>${p}</option>`).join("")}</select></div></div><div class="err" id="fe"></div><br><button class="btn" onclick="nx()">Next</button></div>`;
+if(s==2)return`<h2>Submit Complaint</h2><div class="card">${bar}<b>Step 2 — Attachments</b><label>Upload image or document</label><input type="file" id="f_f" multiple accept="image/*,.pdf,.doc,.docx"><div id="fl" style="margin-top:.8rem">${filesHtml()}</div><br><button class="btn sec" onclick="F.step=1;render()">Back</button> <button class="btn" onclick="F.step=3;render()">Next</button></div>`;
+if(s==3)return`<h2>Submit Complaint</h2><div class="card">${bar}<b>Step 3 — Privacy</b><label style="display:flex;gap:.6rem;align-items:center"><input type="checkbox" id="f_a" style="width:auto" ${d.a?"checked":""}> Submit anonymously</label><p style="color:var(--mu)">Your identity will not be displayed to the department when anonymous reporting is selected.</p><button class="btn sec" onclick="F.d.a=f_a.checked;F.step=2;render()">Back</button> <button class="btn" onclick="F.d.a=f_a.checked;F.step=4;render()">Next</button></div>`;
+return`<h2>Submit Complaint</h2><div class="card">${bar}<b>Step 4 — Review</b><p><b>${esc(d.t)}</b><br>${esc(d.d)}</p><p>Category: <b>${d.c}</b> → routed to <b>${DEPT[d.c]}</b><br>Location: ${esc([d.b,d.k,d.r].filter(Boolean).join(", ")||"–")}<br>Priority: <b>${d.p}</b> · Files: ${tmpFiles.length} · ${d.a?"🕶️ Anonymous":"Named"}</p><button class="btn sec" onclick="F.step=3;render()">Back</button> <button class="btn ac" onclick="doSub()">Submit Complaint</button></div>`}
+function filesHtml(){return tmpFiles.length?tmpFiles.map((f,i)=>`<div style="display:flex;gap:.6rem;align-items:center;margin:.3rem 0">${f.url&&f.type.startsWith("image")?`<img src="${f.url}" width=44 height=44 style="object-fit:cover;border-radius:8px">`:"📄"}<span style="flex:1">${esc(f.name)}</span><button class="btn er sm" onclick="tmpFiles.splice(${i},1);fl.innerHTML=filesHtml()">Delete</button></div>`).join(""):`<span style="color:var(--mu)">No files attached (optional).</span>`}
+function bindSub(){const f=document.getElementById("f_f");if(f)f.onchange=()=>{[...f.files].forEach(x=>{if(x.size>5e6)return toast(x.name+" is over 5MB");tmpFiles.push({name:x.name,type:x.type,url:URL.createObjectURL(x)})});document.getElementById("fl").innerHTML=filesHtml()}}
+function nx(){const d=F.d;d.t=f_t.value.trim();d.c=f_c.value;d.d=f_d.value.trim();d.b=f_b.value;d.k=f_k.value;d.r=f_r.value;d.p=f_p.value;
+if(d.t.length<5)return fe.textContent="Title must be at least 5 characters.";if(!d.c)return fe.textContent="Please select a category.";if(d.d.length<10)return fe.textContent="Description must be at least 10 characters.";F.step=2;render()}
+function doSub(){const d=F.d,now=Date.now(),id="CMP-2026-"+String(S.seq++).padStart(5,"0");
+const c={id,title:d.t,desc:d.d,cat:d.c,loc:[d.b,d.k,d.r].filter(Boolean).join(", ")||"Not specified",pri:d.p,anon:!!d.a,sid:U.id,student:U.name,status:"Assigned",dept:DEPT[d.c],officer:"Officer "+DEPT[d.c].split(" ")[0],created:now,deadline:now+SLA[d.p]*H,prev:null,notes:[],fb:null,att:tmpFiles.map(f=>({name:f.name,type:f.type})),upd:[{t:now,m:"Complaint submitted",s:"Submitted",pub:1},{t:now+1,m:"Assigned to "+DEPT[d.c],s:"Assigned",pub:1}]};
+S.C.unshift(c);notify(c,`Your complaint ${id} has been assigned to ${c.dept}.`);save();F={step:5,d:{},done:c};tmpFiles=[];render();toast("Complaint submitted")}
+// ---------- detail
+function detail(){const c=S.C.find(x=>x.id==R.id);if(!c)return`<div class="empty">Complaint not found.</div>`;const own=U.role=="student",stf=!own;
+const es=S.esc.filter(e=>e.cid==c.id);
+return`<button class="btn sec sm" onclick="history.length&&go(U.role=='student'?'mine_':'adminc')">← Back</button><h2 style="margin-top:.6rem">${esc(c.title)}</h2>
+<div class="grid g2"><div>${tl(c)}
+${stf?`<div class="card" style="margin-top:1rem"><b>Manage</b><label>Status</label><select id="m_s">${ALLS.map(s=>`<option ${c.status==s?"selected":""}>${s}</option>`).join("")}</select>
+${U.role=="admin"?`<label>Department</label><select id="m_d">${[...new Set(Object.values(DEPT))].map(d=>`<option ${c.dept==d?"selected":""}>${d}</option>`).join("")}</select>`:""}
+<label>Priority</label><select id="m_p">${PRI.map(p=>`<option ${c.pri==p?"selected":""}>${p}</option>`).join("")}</select>
+<label>Public update (visible to student)</label><textarea id="m_u" rows="2" placeholder="Maintenance team inspected the location."></textarea>
+<label>Internal note</label><textarea id="m_n" rows="2"></textarea><br><button class="btn" onclick="apply('${c.id}')">Save changes</button>
+${["Resolved","Closed"].includes(c.status)?` <button class="btn sec" onclick="reopen('${c.id}')">Reopen</button>`:` <button class="btn ac" onclick="quick('${c.id}')">Mark Resolved</button>`}</div>`:""}</div>
+<div><div class="card"><b>Complaint Information</b><p>${esc(c.desc)}</p><p style="color:var(--mu)">Category: ${c.cat}<br>Location: ${esc(c.loc)}<br>Priority: <span class="p-${c.pri}">${c.pri}</span><br>Date: ${fd(c.created)}<br>Raised by: <b>${own?esc(c.student)+(c.anon?" (shown as Anonymous to staff)":""):esc(who(c))}</b></p>
+<b>Assignment</b><p style="color:var(--mu)">${c.dept} · ${c.officer}<br>Assigned ${fd(c.upd[1]?.t||c.created)}</p>
+<b>Attachments</b><p style="color:var(--mu)">${c.att?.length?c.att.map(a=>"📎 "+esc(a.name)).join("<br>"):"None"}</p></div>
+${es.length&&stf?`<div class="card" style="margin-top:1rem"><b>Escalation history</b>${es.map(e=>`<p class="err">⚠ ${fd(e.t)} – ${e.reason} → ${e.to} ${e.res?"(resolved)":""}</p>`).join("")}</div>`:""}
+<div class="card" style="margin-top:1rem"><b>Updates</b>${c.upd.filter(u=>u.pub).map(u=>`<p style="margin:.4rem 0"><small>${fd(u.t)}</small><br>${esc(u.m)}</p>`).reverse().join("")}${stf?c.notes.map(n=>`<p style="margin:.4rem 0;background:var(--bg);padding:.4rem;border-radius:8px"><small>🔒 Internal · ${fd(n.t)}</small><br>${esc(n.m)}</p>`).join(""):""}</div>
+${own&&["Resolved","Closed"].includes(c.status)?fbBox(c):""}</div></div>`}
+function fbBox(c){if(c.fb)return`<div class="card" style="margin-top:1rem"><b>Your feedback</b><p>${"★".repeat(c.fb.r)}${"☆".repeat(5-c.fb.r)}<br>${esc(c.fb.c)}</p></div>`;
+return`<div class="card" style="margin-top:1rem"><b>How was your resolution experience?</b><div class="stars" id="stars">${[1,2,3,4,5].map(i=>`<span onclick="rate=${i};paint()">★</span>`).join("")}</div><textarea id="fbt" rows="2" placeholder="Tell us more…"></textarea><div class="err" id="fbe"></div><br><button class="btn" onclick="sendFb('${c.id}')">Submit Feedback</button></div>`}
+let rate=0;function paint(){document.querySelectorAll("#stars span").forEach((s,i)=>s.classList.toggle("f",i<rate))}
+function sendFb(id){if(!rate)return fbe.textContent="Please choose a rating.";const c=S.C.find(x=>x.id==id);c.fb={r:rate,c:fbt.value.trim()||"(no comment)"};rate=0;save();toast("Thanks for your feedback!");render()}
+function apply(id){const c=S.C.find(x=>x.id==id),ns=m_s.value,u=m_u.value.trim(),n=m_n.value.trim();
+if(document.getElementById("m_d")&&m_d.value!=c.dept){c.dept=m_d.value;c.upd.push({t:Date.now(),m:"Reassigned to "+c.dept,s:c.status,pub:1});notify(c,`Your complaint ${c.id} has been assigned to ${c.dept}.`)}
+if(m_p.value!=c.pri){c.pri=m_p.value;c.deadline=c.created+SLA[c.pri]*H}
+if(ns!=c.status)setStatus(c,ns,"Status changed to "+ns);
+if(ns=="Resolved"||ns=="Closed")S.esc.forEach(e=>{if(e.cid==id&&!e.res)e.res=Date.now()});
+if(u){c.upd.push({t:Date.now(),m:u,s:c.status,pub:1});notify(c,`${c.dept} added an update on ${c.id}: ${u}`)}
+if(n)c.notes.push({t:Date.now(),m:n});save();toast("Changes saved");render()}
+function quick(id){const c=S.C.find(x=>x.id==id);setStatus(c,"Resolved","Complaint resolved");S.esc.forEach(e=>{if(e.cid==id&&!e.res)e.res=Date.now()});toast("Marked resolved");render()}
+function reopen(id){const c=S.C.find(x=>x.id==id);c.deadline=Date.now()+SLA[c.pri]*H;c.fb=null;setStatus(c,"In Progress","Complaint reopened");render()}
+// ---------- other pages
+function notifs(){const l=S.N.filter(n=>n.u==U.id);return`<h2>Notifications</h2><button class="btn sec sm" onclick="S.N.forEach(n=>n.u==U.id&&(n.r=1));save();render()">Mark all read</button><br><br>${l.length?l.map(n=>`<div class="card" style="margin-bottom:.6rem;${n.r?"opacity:.7":"border-left:4px solid var(--ac)"};cursor:pointer" onclick="go('detail','${n.cid}')">${esc(n.m)}<br><small style="color:var(--mu)">${fd(n.t)}</small></div>`).join(""):`<div class="empty">🔔 You're all caught up.</div>`}`}
+function profile(){return`<h2>Profile</h2><div class="card"><p><b>${esc(U.name)}</b><br>${esc(U.email)}<br>Role: ${U.role}</p><p>Complaints filed: ${mine().length}</p><button class="btn sec" onclick="if(confirm('Reset all demo data?')){localStorage.removeItem('scs2');load();toast('Demo data reset');render()}">Reset demo data</button></div>`}
+function escal(){const l=S.C.filter(c=>c.status=="Escalated");return`<h2>Escalations</h2>${l.map(c=>`<div class="warn"><b>⚠ ESCALATION REQUIRED</b><br>Complaint ${c.id} has exceeded its resolution deadline.<br>Escalate to: Higher Authority / College Administration<br><button class="btn sm" style="margin-top:.5rem" onclick="go('detail','${c.id}')">Open complaint</button></div>`).join("")||`<div class="empty">✅ No active escalations.</div>`}
+<h3>Escalation history</h3><div class="card">${S.esc.length?S.esc.map(e=>`<p style="margin:.3rem 0"><b>${e.cid}</b> · ${fd(e.t)} · ${e.reason} → ${e.to} · ${e.res?"✅ Resolved "+fd(e.res):"🔴 Open"}</p>`).join(""):"None yet."}</div>`}
+function analytics(){const l=S.C.filter(c=>!flt.ad||Date.now()-c.created<flt.ad*24*H),k=cnt(l),fb=l.filter(c=>c.fb),by=f=>{const o={};l.forEach(c=>o[f(c)]=(o[f(c)]||0)+1);return o};
+const mo={};l.forEach(c=>{const m=new Date(c.created).toLocaleString("en",{month:"short",year:"2-digit"});mo[m]=(mo[m]||0)+1});
+const avg=fb.length?(fb.reduce((s,c)=>s+c.fb.r,0)/fb.length).toFixed(1):"–",rt=[5,4,3,2,1].reduce((o,r)=>(o["★".repeat(r)]=fb.filter(c=>c.fb.r==r).length,o),{});
+return`<h2>Analytics</h2><div class="tools"><select onchange="flt.ad=+this.value;render()">${[[0,"All time"],[7,"Last 7 days"],[30,"Last 30 days"],[180,"Last 6 months"]].map(([v,t])=>`<option value="${v}" ${(flt.ad||0)==v?"selected":""}>${t}</option>`).join("")}</select></div>
+<div class="grid g4">${[["Total",k.t],["Resolution rate",k.t?Math.round(k.r/k.t*100)+"%":"–"],["Avg resolution",avgRes(l)],["Escalated",k.e],["Anonymous",l.filter(c=>c.anon).length],["Avg rating",avg+" ★"]].map(([a,b])=>`<div class="card stat"><b>${b}</b><span>${a.toUpperCase()}</span></div>`).join("")}</div>
+<div class="grid g2" style="margin-top:1rem"><div class="card"><b>By category</b>${bars(by(c=>c.cat))}</div><div class="card"><b>By department</b>${bars(by(c=>c.dept))}</div><div class="card"><b>Monthly volume</b>${bars(mo)}</div><div class="card"><b>Satisfaction ratings</b>${bars(rt)}<hr><b>Recent feedback</b>${fb.slice(0,4).map(c=>`<p style="margin:.3rem 0">${"★".repeat(c.fb.r)} ${esc(c.fb.c)} <small>(${c.id})</small></p>`).join("")}</div></div>`}
+load();render();
+</script></body></html>
